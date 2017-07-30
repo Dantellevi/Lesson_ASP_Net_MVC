@@ -1,0 +1,43 @@
+﻿@using Metanit_work_with_hard_database.Models
+@model Team
+
+@{
+    ViewBag.Title = "Описание команды";
+}
+
+<h2>TeamDetails</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Couch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Couch)
+        </dd>
+
+        <dd>
+            <ul>
+                @foreach (Player player in Model.Players)
+                {
+                    <li>@player.Name (@player.Position)</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

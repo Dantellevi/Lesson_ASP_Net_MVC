@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Metanit_work_with_hard_database.Models.Team>
+
+@{
+    ViewBag.Title = "ListTeams";
+}
+
+<h2>ListTeams</h2>
+
+<p>
+    @Html.ActionLink("Добавить команду", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Имя команды:
+        </th>
+        <th>
+            Фамилия тренера:
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Couch)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Описание", "TeamDetails", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
