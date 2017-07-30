@@ -1,0 +1,65 @@
+﻿@model Metanit_work_with_hard_database.Models.Player
+
+@{
+    ViewBag.Title = "Добавление игрока";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Футболист</h4>
+        <hr />
+       
+        <div class="form-group">
+           <label class="control-label col-md-2">Имя игрока:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Возраст игрока:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Позиция игрока:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Команда:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TeamId, ViewBag.Teams as SelectList)
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("К списку игроков", "Index", null, new {@class="btn btn-primary" })
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
