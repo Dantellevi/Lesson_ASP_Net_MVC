@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlandRoute", "UrlandRoute\UrlandRoute.csproj", "{AE3CEC8C-5042-4003-BB2F-B4434BA1BBD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{D06065B1-56C3-4D05-9B53-B1AF7FCBB8D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE3CEC8C-5042-4003-BB2F-B4434BA1BBD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE3CEC8C-5042-4003-BB2F-B4434BA1BBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE3CEC8C-5042-4003-BB2F-B4434BA1BBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE3CEC8C-5042-4003-BB2F-B4434BA1BBD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D06065B1-56C3-4D05-9B53-B1AF7FCBB8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D06065B1-56C3-4D05-9B53-B1AF7FCBB8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D06065B1-56C3-4D05-9B53-B1AF7FCBB8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D06065B1-56C3-4D05-9B53-B1AF7FCBB8D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

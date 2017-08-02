@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+    <div>Контроллер :@ViewBag.Controller</div>
+        <div>Действие :@ViewBag.Action</div>
+    </div>
+    <div>
+        @Html.ActionLink("Ссылка для перехода","CustomVariable")
+    </div>
+    <div>
+        @Html.ActionLink("Ссылка на другой метод другого контроллера", "Index", "Admin");
+
+    </div>
+    <div>
+        @Html.ActionLink("Ссылка на метод с атрибутом Route", "Index", "Customer");
+
+    </div>
+    <div>
+        @Html.ActionLink("Ссылка с передачей параметров", "CustomeVariable", new { id = "Hello" });
+    </div>
+
+    <div>
+
+        @Html.ActionLink("Modifire Link +class+Id","Index","Home",null,new {
+       id="myAnchorchID",
+        @class="myCSSClass"})
+
+    </div>
+</body>
+</html>
