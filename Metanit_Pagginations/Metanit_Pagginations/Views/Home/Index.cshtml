@@ -1,0 +1,26 @@
+﻿@model Metanit_Pagginations.Models.IndexViewModel
+@using Metanit_Pagginations.Helper
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table">
+    <tr>
+        <td>Модель</td>
+        <td>Производитель</td>
+    </tr>
+    @foreach (var item in Model.Phones)
+    {
+        <tr>
+            <td>@item.Model</td>
+            <td>@item.Producer</td>
+        </tr>
+    }
+</table>
+<br />
+<div class="btn-group">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+</div>
+
