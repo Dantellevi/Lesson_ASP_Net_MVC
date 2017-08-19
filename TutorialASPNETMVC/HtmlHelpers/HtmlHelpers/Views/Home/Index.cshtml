@@ -1,0 +1,33 @@
+﻿@using  HtmlHelpers.Helpers
+@model IEnumerable<HtmlHelpers.Models.Book>
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    @helper BookList(IEnumerable<HtmlHelpers.Models.Book> books)
+    {
+
+    
+        foreach(var b in books)
+        {
+            <div>
+               <p><h1>@b.NameBook</h1></p> 
+                <p>@b.Author</p>  
+                <p>@b.Year</p>  
+                <p>@b.Price</p>  
+                <p>------------------------</p>
+            </div>
+            
+        }
+   
+
+    }
+
+    <h2>Index</h2>
+@BookList(Model)
+
+<p>--------------------------------</p>
+@Html.CreateList(Model)
+
+
+
