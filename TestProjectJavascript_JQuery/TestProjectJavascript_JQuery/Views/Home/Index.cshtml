@@ -1,0 +1,143 @@
+﻿@model IEnumerable<TestProjectJavascript_JQuery.Models.book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*---------------------------------Работа с Ajax-ссылками--------------------------------------------
+
+        <div id="bestbook">
+        @Ajax.ActionLink("Лучшая книга","BestBook", new AjaxOptions {UpdateTargetId="bestbook" })
+    </div>
+
+
+
+     -------------------------------------------------------------------------------------------------*@
+
+@*
+        В качестве примера можно также изменить код представления
+         из предыдущего раздела про ajax-формы, применив ajax-ссылки:
+
+        @using (Ajax.BeginForm("BookSearch", new AjaxOptions { UpdateTargetId = "results"}))
+    {
+        <input type="text" name="name" />
+        <input type="submit" value="Поиск" />
+    }
+
+    <div id="results"></div>
+    <br />
+    @foreach(string s in ViewBag.Authors)
+    {
+        <div style="margin-right:8px;float:left;">
+            @Ajax.ActionLink(s, "BookSearch", new {name=s},new AjaxOptions{ UpdateTargetId="results"})
+        </div>
+    }
+    @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
+    В итоге все авторы, передаваемые в представление через ViewBag 
+    (например, так: ViewBag.Authors = db.Books.Select(s => s.Author).Distinct();), 
+    выводятся в виде ссылок внизу страницы.
+     А нажатие на одну из этих ссылок будет иметь то же действие, что и поиск по кнопке:
+*@
+
+
+@*<p>----------------------------Поиск с индикацией загрузки-------------------------------</p>*@
+<div>
+    @using (Ajax.BeginForm("BookSearch", new AjaxOptions
+    { UpdateTargetId = "results" ,
+    LoadingElementId="loading",
+    LoadingElementDuration=1000}))
+    {
+        <input type="text" name="name" />
+        <input type="submit" value="Поиск" />
+    }
+    <div id="loading" style="display:none; color:Red; font-weight:bold;"></div>
+    <div id="results"></div>
+
+</div>
+
+@*---------------------- индикации процесса с помощью картинки-------------------------------------
+        @using (Ajax.BeginForm("BookSearch", new AjaxOptions
+    {
+        UpdateTargetId = "results",
+        LoadingElementId = "loading",
+        LoadingElementDuration = 1000
+    }))
+    {
+        <input type="text" name="name" />
+        <input type="submit" value="Поиск" />
+    }
+
+    img id="loading" src="@Url.Content("~/Content/Images/loader.gif")" style="display:none" />
+    <div id="results"></div>*@
+
+@*Confirm
+
+        Этот параметр настраивает сообщение о подтверждении отправки запроса на сервер.
+         Если пользователь не подтвердит, то запрос не будет отправлен.
+       
+     @using (Ajax.BeginForm("BookSearch", new AjaxOptions
+                            { UpdateTargetId = "results",
+                            Confirm="Выполнить AJAX-запрос?"}))
+    {
+        <input type="text" name="name" />
+        <input type="submit" value="Поиск" />
+    }
+    <div id="results"></div>
+
+*@
+
+
+@*------------------------Обратные вызовы---------------------------------------------
+
+
+        Параметры OnBegin, OnComplete, OnFailure и OnSuccess помогают задать обратные вызовы,
+         которые будут выполняться перед запросом,
+         либо в случае удачного или неудачного выполнения запроса.
+
+        Чтобы их использовать, определим соответствующие обработчики
+         javascript в представлении и укажем их в параметрах объекта AjaxOptions:
+
+        ---------------------------------------------
+        <script type="text/javascript">
+        function OnBegin() {
+            alert("Происходит отправка запроса");
+        }
+        function OnSuccess(data) {
+            alert("Запрос был успешно выполнен. Получены следующие данные: \n" + data);
+        }
+        function OnFailure(request, error) {
+            $("#results").html("Книги указанного автора не содержатся в базе данных.");
+        }
+        function OnComplete(request, status) {
+            alert("Статус запроса : " + status);
+        }
+    </script>
+
+    @using (Ajax.BeginForm("BookSearch", new AjaxOptions
+    {
+        UpdateTargetId = "results",
+        OnBegin = "OnBegin",
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        OnComplete = "OnComplete"
+    }))
+    {
+        <input type="text" name="name" />
+        <input type="submit" value="Поиск" />
+    }
+
+    <div id="results"></div>
+    --------------------------------------------------------
+*@
+
+
+
+
+
+<script src="~/scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+
+
+

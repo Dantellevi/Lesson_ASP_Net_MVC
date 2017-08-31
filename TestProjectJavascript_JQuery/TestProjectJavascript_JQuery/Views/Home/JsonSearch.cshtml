@@ -1,0 +1,22 @@
+﻿@model TestProjectJavascript_JQuery.Models.book
+<script type="text/javascript">
+    function OnSuccess(data) {
+        var results = $('#results'); // получаем нужный элемент
+        results.empty(); //очищаем элемент
+        for (var i = 0; i < data.length; i++) {
+            results.append('<li>' + data[i].Name + '</li>'); // добавляем данные в список
+        }
+    }
+</script>
+
+@using (Ajax.BeginForm("JsonSearch", new AjaxOptions { OnSuccess = "OnSuccess" }))
+{
+    <input type="text" name="name" />
+    <input type="submit" value="Поиск" />
+}
+<br />
+<div id="results"></div>
+
+
+<script src="~/scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
