@@ -1,0 +1,54 @@
+﻿@using ASP_Identity_Auth.Models
+@using System.Linq
+@using ASP_Identity_Auth.Controllers
+@model AppUser
+
+@{
+    ViewBag.Title = "Пользовательские свойства";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Пользовательские свойства
+    </div>
+    <table class="table table-striped">
+        <tr><th>Текущий город</th>
+        <td>@HomeController.GetCityName(Model.City)</td>
+        </tr>
+        <tr>
+            <th>
+                Страна
+            </th>
+            <td>
+                @HomeController.GetCityName(Model.Country)
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label>Город:</label>
+        @Html.DropDownListFor(x => x.City, new SelectList(
+                Enum.GetValues(typeof(Cities))
+                .OfType<Cities>()
+                  .Select(c =>
+                  {
+                      return new
+                      {
+                          Id = c,
+                          Text = HomeController.GetCityName(c)
+                      };
+                  }),
+                "Id", "Text"
+        ))
+
+
+    </div>
+}
+
+<button type="submit" class="btn btn-primary">Сохранить</button>
+

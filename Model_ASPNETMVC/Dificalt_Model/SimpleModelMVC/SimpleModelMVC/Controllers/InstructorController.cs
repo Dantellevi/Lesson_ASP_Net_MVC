@@ -219,5 +219,95 @@ namespace SimpleModelMVC.Controllers
             }
             ViewBag.Courses = viewModel;
         }
+
+        //------------------------------------------------------------------------------------------
+
+
+        //-------------------------------------Удаление элемента из базы данных---------------------
+
+            [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var instructors = db.Instructors.Find(id);
+            if (instructors == null)
+            {
+                return HttpNotFound();
+            }
+            return View(instructors);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Instructor instructor = db.Instructors
+                .Include(i => i.OfficeAssignment)
+                .Where(i => i.ID == id)
+                .Single();
+
+            db.Instructors.Remove(instructor);
+
+            var department = db.Departments
+                .Where(i => i.InstructorID == id)
+                .SingleOrDefault();
+
+            if(department!=null)
+            {
+                department.InstructorID = null;
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+        //------------------------------------------------------------------------------------------
+
+
+
+        //--------------------------------Добавление расположение офиса-----------------------------
+
+            [HttpGet]
+        public ActionResult Create()
+        {
+            var instructor = new Instructor();
+            instructor.Courses = new List<Course>();
+            PopulateAssignedCourseData(instructor);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "LastName,FirstMidName,HireDate,OfficeAssignment")]Instructor instructor, string[] selectedCourses)
+        {
+            if(selectedCourses!=null)
+            {
+                instructor.Courses = new List<Course>();
+                foreach(var course in selectedCourses)
+                {
+                    var courseToAdd = db.Courses.Find(int.Parse(course));
+                    instructor.Courses.Add(courseToAdd);
+                }
+            }
+
+            if(ModelState.IsValid)
+            {
+                db.Instructors.Add(instructor);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            PopulateAssignedCourseData(instructor);
+            return View(instructor);
+        }
+
+
+
+
+
+        //------------------------------------------------------------------------------------------
     }
 }

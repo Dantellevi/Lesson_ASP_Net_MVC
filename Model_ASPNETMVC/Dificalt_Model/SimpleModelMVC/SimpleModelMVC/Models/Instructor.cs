@@ -7,20 +7,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SimpleModelMVC.Models
 {
-    public class Instructor
+    public class Instructor:Person
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
 
-        [Required]
-        [Display(Name ="Имя")]
-        [StringLength(55)]
-        public string LastName { get; set; }
+        //[Required]
+        //[Display(Name ="Имя")]
+        //[StringLength(55)]
+        //public string LastName { get; set; }
 
-        [Required]
-        [Column("FirstName")]
-        [Display(Name ="Фамилия")]
-        [StringLength(55)]
-        public string FirstMidName { get; set; }
+        //[Required]
+        //[Column("FirstName")]
+        //[Display(Name ="Фамилия")]
+        //[StringLength(55)]
+        //public string FirstMidName { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
@@ -28,13 +28,13 @@ namespace SimpleModelMVC.Models
         public DateTime HireDate { get; set; }
 
         [Display(Name ="Полное имя")]
-        public string FullName
-        {
-            get
-            {
-                return LastName + " " + FirstMidName;
-            }
-        }
+        //public string FullName
+        //{
+        //    get
+        //    {
+        //        return LastName + " " + FirstMidName;
+        //    }
+        //}
 
 
         public virtual ICollection<Course> Courses { get; set; }

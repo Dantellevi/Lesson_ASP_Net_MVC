@@ -122,3 +122,5 @@ D:\GitRepository\Lesson_ASP_Net_MVC\Model_ASPNETMVC\Dificalt_Model\SimpleModelMV
 D:\GitRepository\Lesson_ASP_Net_MVC\Model_ASPNETMVC\Dificalt_Model\SimpleModelMVC\SimpleModelMVC\obj\Debug\SimpleModelMVC.pdb
 D:\GitRepository\Lesson_ASP_Net_MVC\Model_ASPNETMVC\Dificalt_Model\SimpleModelMVC\SimpleModelMVC\obj\Debug\SimpleModelMVC.Migrations.ElementDatabase.resources
 D:\GitRepository\Lesson_ASP_Net_MVC\Model_ASPNETMVC\Dificalt_Model\SimpleModelMVC\SimpleModelMVC\obj\Debug\SimpleModelMVC.csproj.GenerateResource.Cache
+D:\GitRepository\Lesson_ASP_Net_MVC\Model_ASPNETMVC\Dificalt_Model\SimpleModelMVC\SimpleModelMVC\obj\Debug\SimpleModelMVC.Migrations.DepartmentSP.resources
+D:\GitRepository\Lesson_ASP_Net_MVC\Model_ASPNETMVC\Dificalt_Model\SimpleModelMVC\SimpleModelMVC\obj\Debug\SimpleModelMVC.Migrations.Inheritance.resources

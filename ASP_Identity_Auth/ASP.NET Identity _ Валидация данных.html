@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://professorweb.ru/my/ASP_NET/identity/level1/1_3.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=0.5">
+<style>
+.tests-fixed {
+  position: fixed;
+  right: 35px;
+  top: 92%;
+ /* -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  -webkit-transform-origin: right top 0;
+  -ms-transform-origin: right top 0;
+  transform-origin: right top 0;
+  */
+  color: #fff; }
+  .tests-fixed ul {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    width: auto;
+    margin-left: 15px; }
+    .tests-fixed ul a {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      padding: 7px; }
+    .tests-fixed ul li {
+      display: inline-block;
+      background-color: #23C1DB;
+      margin-top: 5px; }
+</style><meta http-equiv="description" content="Примеры использования проверки достоверности паролей и данных пользователя в системе ASP.NET Identity">
+<link rel="stylesheet" type="text/css" href="./ASP.NET Identity _ Валидация данных_files/style.old.min.css">
+<script type="text/javascript" async="" src="./ASP.NET Identity _ Валидация данных_files/watch.js.Без названия"></script><script async="" src="./ASP.NET Identity _ Валидация данных_files/analytics.js.Без названия"></script><script src="./ASP.NET Identity _ Валидация данных_files/cb=gapi.loaded_1" async=""></script><script src="./ASP.NET Identity _ Валидация данных_files/cb=gapi.loaded_0" async=""></script><script src="./ASP.NET Identity _ Валидация данных_files/ca-pub-5800933623532334.js.Без названия"></script><script type="text/javascript" async="" src="./ASP.NET Identity _ Валидация данных_files/plusone.js.Без названия" gapi_processed="true"></script><script async="" src="./ASP.NET Identity _ Валидация данных_files/adsbygoogle.js.Без названия"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5800933623532334",
+    enable_page_level_ads: true
+  });
+</script><title>ASP.NET Identity | Валидация данных</title>
+</head>
+<body style="display: block;">
+<div id="main">
+   
+</div>
+
+<div class="wrapper">
+	<div class="wrapper_helper"></div>
+	<div class="wrapper_img"></div>
+</div>
+
+<div class="main">
+
+	<section class="flip typo">
+		<p>Нашли ошибку или опечатку? Выделите текст и нажмите </p>
+	</section>
+	<section class="flip theme">
+		<p>Поменять цветовую</p> <p>гамму сайта?</p>
+		<span>Поменять</span>
+	</section>
+	<section class="flip rss">
+		<a href="https://professorweb.ru/forum/64">Обновления сайта<br> и новые разделы</a>
+	</section>
+        <section class="flip plus">
+		<p>Рекомендовать в Google +1 </p>
+		<div class="plusone">
+			<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 38px; height: 24px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 38px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I0_1504686884350" name="I0_1504686884350" src="./ASP.NET Identity _ Валидация данных_files/fastbutton.html" data-gapiattached="true" title="G+"></iframe></div>
+		</div>
+		<script type="text/javascript">window.___gcfg = {lang: 'ru',parsetags: 'onload'};(function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>
+	</section>
+
+	<nav class="menu">
+		<ul>
+			<li class="active"><a href="https://professorweb.ru/my/csharp/charp_theory/level1/infonet.php"><span>C# и .NET</span></a></li>
+			<li class="tab2 no-active"><a href="https://professorweb.ru/my/html/html5/level1/web_info.php"><span>Web</span></a></li>
+			<li class="tab3"><a href="https://professorweb.ru/forum/"><span>Форум</span></a></li>
+		</ul>
+		<a href="https://professorweb.ru/" class="logo"></a>
+		<form autocomplete="off" action="https://professorweb.ru/my/csharp/charp_theory/level1/search_result.php" method="get">
+			<input type="text" name="valsearch" placeholder="Найти.." data-x-webkit-speech="x-webkit-speech">
+			<input type="submit" value="">
+		</form>
+	</nav>
+	<nav class="submenu active">
+		<ul>
+			<li><a href="https://professorweb.ru/my/csharp/charp_theory/level1/infocsharp.php">C# 5.0 и .NET 4.5</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/csharp/charp_theory/level1/index.php">Руководство C# - Часть 1</a></li>
+					<li><a href="https://professorweb.ru/my/csharp/charp_theory/level1/index1.php">Руководство C# - Часть 2</a></li>
+					<li><a href="https://professorweb.ru/my/csharp/base_net/level1/net_index.php">Основы .NET</a></li>
+					<li><a href="https://professorweb.ru/my/csharp/assembly/level1/assembly_index.php">Сборки .NET</a></li>
+					<li><a href="https://professorweb.ru/my/csharp/thread_and_files/1/thread_index.php">Потоки и файлы</a></li>
+					<li><a href="https://professorweb.ru/my/csharp/web/level1/web_index.php">Работа с сетью</a></li>
+                                        <li><a href="https://professorweb.ru/my/csharp/optimization/level1/">Оптимизация приложений</a></li>
+				</ul>
+			</li>
+			<li><a href="https://professorweb.ru/my/WPF/base_WPF/level1/info_WPF.php">WPF</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/WPF/base_WPF/level1/base_WPF_index.php">Основа WPF</a></li>
+					<li><a href="https://professorweb.ru/my/WPF/UI_WPF/level6/UI_WPF_index.php">Элементы управления WPF</a></li>
+					<li><a href="https://professorweb.ru/my/WPF/binding_and_styles_WPF/level8/bas_WPF_index.php">Привязка и стили</a></li>
+					<li><a href="https://professorweb.ru/my/WPF/graphics_and_animation/level12/graph_animation_index.php">Графика и анимация</a></li>
+					<li><a href="https://professorweb.ru/my/WPF/Template/level17/template_index.php">Шаблоны WPF</a></li>
+					<li><a href="https://professorweb.ru/my/WPF/documents_WPF/level28/document_index.php">Периферия WPF</a></li>
+				</ul>
+			</li>
+			<li><a href="https://professorweb.ru/my/WPF/themes/DarkBlue_UI/info_themes.php">Темы WPF</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/WPF/themes/DarkBlue_UI/theme_db.php">Dark Blue UI</a></li>
+					<li><a href="https://professorweb.ru/my/WPF/themes/DarkOrange_UI/theme_or.php">Dark Orange UI</a></li>
+				</ul>
+			</li>
+			<li><a href="https://professorweb.ru/my/Silverlight/base/level1/s_index.php">Silverlight 5</a></li>                 
+			<li>
+            		       <a href="https://professorweb.ru/my/ADO_NET/base/level1/info_db.php">Работа с БД</a>
+					<ul>
+						<li><a href="https://professorweb.ru/my/ADO_NET/base/level1/ado_net_index.php">ADO.NET</a></li>
+						<li><a href="https://professorweb.ru/my/entity-framework/6/level1/">Entity Framework 6</a></li>
+						<li><a href="https://professorweb.ru/my/sql-server/2012/level1/">SQL Server 2012</a></li>
+                                                <li><a href="https://professorweb.ru/my/sql-server/window-functions/level1/">Оконные функции</a></li>
+					</ul>
+			</li>
+			<li><a href="https://professorweb.ru/my/LINQ/base/level1/info_linq.php">LINQ</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/LINQ/base/level1/linq_index.php">LINQ to Objects</a></li>
+					<li><a href="https://professorweb.ru/my/LINQ/linq_xml/level5/linq_to_xml_index.php">LINQ to XML</a></li>
+					<li><a href="https://professorweb.ru/my/LINQ/linq_sql/level8/linq_to_dataset_and_sql_index.php">LINQ to DataSet и SQL</a></li>
+					<li><a href="https://professorweb.ru/my/LINQ/linq_entities/level14/linq_to_entities_index.php">LINQ to Entities</a></li>
+					<li><a href="https://professorweb.ru/my/LINQ/PLINQ/level16/plinq_index.php">Parallel LINQ</a></li>
+				</ul>
+			</li>
+			<li class="active"><a href="https://professorweb.ru/my/ASP_NET/base/level1/aspnet_info.php">ASP.NET</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/ASP_NET/base/level1/base_aspnet_index.php">Основы ASP.NET</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/sites/level1/">Веб-сайты</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/security/level1/">Безопасность</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/gamestore/level1/">Интернет магазин</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/webforms_4_5/level1/">ASP.NET Web Forms 4.5</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/mvc/level1/">ASP.NET MVC 5</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/identity/level1/">Аутентификация</a></li>
+				</ul>
+			</li>
+            <li><a href="https://professorweb.ru/my/windows8/rt/level1/info_w8.php">Windows 8/10</a>
+            	<ul>
+					<li><a href="https://professorweb.ru/my/windows8/rt/level1/">WinRT - основы</a></li>
+                     <li><a href="https://professorweb.ru/my/windows8/rt-ext/level1/">WinRT - расширения</a></li>
+                </ul>
+            </li>
+            <li><a href="https://professorweb.ru/my/programs/visual-studio/level1/info_programs.php">Программы</a>
+            	<ul>
+					<li><a href="https://professorweb.ru/my/expression_blend/base/level1/info_eb4.php">Expression Blend 4</a></li>
+                    <li><a href="https://professorweb.ru/my/programs/visual-studio/level1/">Visual Studio</a></li>
+                </ul>
+            </li>
+		</ul>
+	</nav>
+	<nav class="submenu no-active">
+		<ul>
+			<li><a href="https://professorweb.ru/my/html/html5/level1/web_info.php#pro_html5">HTML5 и CSS3</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/html/html5/level1/html5_index.php">Учебник HTML5</a></li>
+					<li><a href="https://professorweb.ru/my/css/css_theory/level1/css_index.php">Учебник CSS3</a></li>
+				</ul>
+			</li>
+			<li><a href="https://professorweb.ru/my/html/html5/level1/web_info.php#pro_js">JavaScript</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/javascript/js_theory/level1/javascript_index.php">Учебник JavaScript</a></li>
+					<li><a href="https://professorweb.ru/my/javascript/jquery/level1/jquery_index.php">jQuery</a></li>
+				</ul>
+			</li>
+			<li class="active"><a href="https://professorweb.ru/my/ASP_NET/base/level1/aspnet_info.php">ASP.NET</a>
+				<ul>
+					<li><a href="https://professorweb.ru/my/ASP_NET/base/level1/base_aspnet_index.php">Основы ASP.NET</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/sites/level1/">Веб-сайты</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/security/level1/">Безопасность</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/gamestore/level1/">Интернет магазин</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/webforms_4_5/level1/">ASP.NET Web Forms 4.5</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/mvc/level1/">ASP.NET MVC 5</a></li>
+					<li><a href="https://professorweb.ru/my/ASP_NET/identity/level1/">Аутентификация</a></li>
+				</ul>
+			</li>
+			<li><a href="https://professorweb.ru/my/it/blog/net/">IT-блог</a></li>
+			<li class="php"><a href="http://addphp.ru/">PHP и MySQL</a></li>
+		</ul>
+	</nav>
+   
+<div id="submain">
+   <div itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate" id="content">
+     <h1 itemprop="itemreviewed">Валидация данных в ASP.NET Identity</h1>
+     
+<!--bottom-->
+<div style="margin:30px auto;">
+  <div style="float: right; width: 50%; margin: 0px; padding: 0px; border-width: 0px;"><script async="" src="./ASP.NET Identity _ Валидация данных_files/adsbygoogle.js.Без названия"></script>
+<ins class="adsbygoogle" style="display: block; height: 135px;" data-ad-format="fluid" data-ad-layout="image-side" data-ad-layout-key="-ff+4g+9i-dn-2h" data-ad-client="ca-pub-5819559848186638" data-ad-slot="3008722559" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display: inline-table; border: none; height: 135px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 544px; background-color: transparent;"><ins id="aswift_1_anchor" style="display: block; border: none; height: 135px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 544px; background-color: transparent; overflow: hidden;"><iframe width="544" height="166" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:544px;height:166px;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource.html"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+  <div style="margin-right:50%;"><script async="" src="./ASP.NET Identity _ Валидация данных_files/adsbygoogle.js.Без названия"></script>
+<ins class="adsbygoogle" style="display: block; height: 135px;" data-ad-format="fluid" data-ad-layout="image-side" data-ad-layout-key="-ff+4g+9i-dn-2h" data-ad-client="ca-pub-5819559848186638" data-ad-slot="3008722559" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display: inline-table; border: none; height: 135px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 544px; background-color: transparent;"><ins id="aswift_2_anchor" style="display: block; border: none; height: 135px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 544px; background-color: transparent; overflow: hidden;"><iframe width="544" height="166" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;width:544px;height:166px;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(1).html"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+</div>
+     <meta itemprop="rating" content="5.0"><span class="get_votes" itemprop="votes">166</span>
+     <p class="maplink"><a href="https://professorweb.ru/my/ASP_NET/base/level1/aspnet_info.php">ASP.NET</a> --- <a href="https://professorweb.ru/my/ASP_NET/identity/level1/">ASP.NET Identity</a> --- Валидация данных ASP.NET Identity</p>
+<div style="max-height:280px; max-width:336px; margin: 20px auto; float:none; margin: 0 0 16px 16px; float: right; margin: 10px 20px 20px 0; float: left;">
+1
+</div><p>В этой статье мы продолжим проектировать наш простой проект управления пользователями и рассмотрим возможности <em class="h">проверки достоверности (валидации)</em> введенных данных при создании новых пользователей.</p>
+<h2>Проверка паролей</h2>
+<p>Одним из наиболее распространенных требований, особенно при разработке корпоративных приложений, является контроль сложности паролей, которые используют пользователи для входа в свою учетную запись. ASP.NET Identity включает <strong class="h">класс PasswordValidator</strong>, с помощью которого можно настроить систему сложности проверки паролей, используя свойства, перечисленные в таблице ниже: </p>
+<div class="table_wrapper"><table class="new_table" border="2" cellpadding="15">
+  <caption>Свойства, определенные в классе PasswordValidator</caption>
+  <tbody><tr>
+    <th>Название</th>
+    <th>Описание</th>
+  </tr>
+  <tr>
+    <td><strong class="h">RequiredLength</strong></td>
+    <td><p>Задает минимально допустимую длину пароля</p></td>
+  </tr><tr>
+    <td><strong class="h">RequireNonLetterOrDigit</strong></td>
+    <td><p>Если установлено значение true, пароль должен содержать хотя бы один символ, который не является ни буквой ни цифрой</p></td>
+  </tr><tr>
+    <td><strong class="h">RequireDigit</strong></td>
+    <td><p>Если установлено значение true, пароль должен содержать цифры</p></td>
+  </tr>
+  <tr>
+    <td><strong class="h">RequireLowercase</strong></td>
+    <td><p>Если установлено значение true, пароль должен содержать строчные символы</p></td>
+  </tr>
+  <tr>
+    <td><strong class="h">RequireUppercase</strong></td>
+    <td><p>Если установлено значение true, пароль должен содержать прописные символы</p></td>
+  </tr>
+</tbody></table></div>
+<p>Политика определения паролей задается путем создания экземпляра класса PasswordValidator, установки значений его свойств и использовании этого объекта в качестве значения для свойства PasswordValidator класса UserManager&lt;T&gt; в методе Create: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs"><span class="hljs-keyword">using</span> Microsoft.AspNet.Identity;
+<span class="hljs-keyword">using</span> Microsoft.AspNet.Identity.EntityFramework;
+<span class="hljs-keyword">using</span> Microsoft.AspNet.Identity.Owin;
+<span class="hljs-keyword">using</span> Microsoft.Owin;
+<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Web;
+<span class="hljs-keyword">using</span> Users.Models;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Users.Infrastructure</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AppUserManager</span> : <span class="hljs-title">UserManager</span>&lt;<span class="hljs-title">AppUser</span>&gt;
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AppUserManager</span>(<span class="hljs-params">IUserStore&lt;AppUser&gt; store</span>)
+            : <span class="hljs-title">base</span>(<span class="hljs-params">store</span>)
+        </span>{ }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> AppUserManager <span class="hljs-title">Create</span>(<span class="hljs-params">IdentityFactoryOptions&lt;AppUserManager&gt; options,
+            IOwinContext context</span>)
+        </span>{
+            AppIdentityDbContext db = context.Get&lt;AppIdentityDbContext&gt;();
+            AppUserManager manager = <span class="hljs-keyword">new</span> AppUserManager(<span class="hljs-keyword">new</span> UserStore&lt;AppUser&gt;(db));
+
+            manager.PasswordValidator = <span class="hljs-keyword">new</span> PasswordValidator
+            {
+                RequiredLength = <span class="hljs-number">6</span>,
+                RequireNonLetterOrDigit = <span class="hljs-keyword">false</span>,
+                RequireDigit = <span class="hljs-keyword">false</span>,
+                RequireLowercase = <span class="hljs-keyword">true</span>,
+                RequireUppercase = <span class="hljs-keyword">true</span>
+            };
+
+            <span class="hljs-keyword">return</span> manager;
+        }
+    }
+}</code></pre>
+</div>
+<p>Я использовал класс PasswordValidator, чтобы определить политику, которая требует не менее шести символов, сочетание прописных и строчных букв. Чтобы протестировать эту функциональность, запустите приложение и перейдите по адресу /Admin/Index, затем нажмите кнопку «Создать» и попытайтесь создать пользователя с пустым паролем. При отправке формы,  пароль не пройдет проверку достоверности, в результате отобразится ошибка: </p>
+<div class="imgcontent"><img src="./ASP.NET Identity _ Валидация данных_files/img49607.jpg" alt="Пример использования проверки достоверности пароля в Identity"></div>
+<h3>Реализация пользовательской проверки паролей</h3>
+<p>Возможности встроенной проверки паролей являются достаточными для большинства приложений. Однако, возможно вам потребуется создать сложные проверки достоверности для паролей, выходящие за рамки стандартных свойств класса PasswordValidator. Расширить базовые возможности валидации паролей можно, создав класс, унаследованный от  PasswordValidator и переопределяющий его <em class="h">метод ValidateAsync()</em>.  Добавьте файл класса CustomPasswordValidator.cs в папку Infrastructure со следующим содержимым: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs"><span class="hljs-keyword">using</span> Microsoft.AspNet.Identity;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Users.Infrastructure</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomPasswordValidator</span> : <span class="hljs-title">PasswordValidator</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;IdentityResult&gt; <span class="hljs-title">ValidateAsync</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> pass</span>)
+        </span>{
+            IdentityResult result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">base</span>.ValidateAsync(pass);
+
+            <span class="hljs-keyword">if</span> (pass.Contains(<span class="hljs-string">"12345"</span>))
+            {
+                <span class="hljs-keyword">var</span> errors = result.Errors.ToList();
+                errors.Add(<span class="hljs-string">"Пароль не должен содержать последовательности чисел."</span>);
+                result = <span class="hljs-keyword">new</span> IdentityResult(errors);
+            }
+
+            <span class="hljs-keyword">return</span> result;
+        }
+    }
+}</code></pre>
+</div>
+<p>В этом примере мы переопределили метод ValidateAsync() и вызвали сначала базовую реализацию этого метода для запуска встроенной проверки. Далее мы добавили пользовательскую проверку паролей на предмет того, не содержит ли он последовательности чисел «12345». Свойство Errors объекта IdentityResult доступно только для чтения, поэтому чтобы вернуть список ошибок мы создали новый объект  IdentityResult и объединили ошибки из базовой проверки достоверности паролей с ошибками из пользовательской проверки. Я использовал LINQ для соединения этих ошибок.</p>
+<p>Следующий пример демонстрирует использование нового класса валидатора: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs">manager.PasswordValidator = <span class="hljs-keyword">new</span> CustomPasswordValidator
+{
+    RequiredLength = <span class="hljs-number">6</span>,
+    RequireNonLetterOrDigit = <span class="hljs-keyword">false</span>,
+    RequireDigit = <span class="hljs-keyword">false</span>,
+    RequireLowercase = <span class="hljs-keyword">true</span>,
+    RequireUppercase = <span class="hljs-keyword">true</span>
+};</code></pre>
+</div>
+<p>Чтобы протестировать пользовательскую проверку паролей, попробуйте создать новую учетную запись пользователя с паролем "secret12345". Этот пароль нарушает два правила проверки — одно правило для встроенной проверки, второе — для пользовательской. Обе эти ошибки отобразятся при попытке создать нового пользователя: </p>
+<div style="max-height:280px; margin: 20px auto;"><!--inarticle-->
+<script async="" src="./ASP.NET Identity _ Валидация данных_files/adsbygoogle.js.Без названия"></script>
+<ins class="adsbygoogle" style="display: block; text-align: center; height: 200px;" data-ad-format="fluid" data-ad-layout="in-article" data-ad-client="ca-pub-5819559848186638" data-ad-slot="6095240264" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:1088px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:1088px;background-color:transparent;"><iframe width="1088" height="200" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:1088px;height:200px;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(2).html"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="imgcontent"><img src="./ASP.NET Identity _ Валидация данных_files/img49608.jpg" alt="Использование расширенной проверки достоверности паролей системы Identity"></div>
+<h2>Проверка данных пользователя</h2>
+<p>Более общие проверки могут осуществляться путем создания экземпляра класса <strong class="h">UserValidator</strong> и использования его свойств из таблицы ниже: </p>
+<div class="table_wrapper"><table class="new_table" border="2" cellpadding="15">
+  <caption>Свойства, определенные в классе UserValidator</caption>
+  <tbody><tr>
+    <th>Название</th>
+    <th>Описание</th>
+  </tr>
+  <tr>
+    <td><em class="h">AllowOnlyAlphanumericUserNames</em></td>
+    <td><p>Если задано true, имена пользователей могут содержать только буквы и цифры</p></td>
+  </tr><tr>
+    <td><em class="h">RequireUniqueEmail</em></td>
+    <td><p>Требует наличие уникального адреса электронно почты</p></td>
+  </tr>
+</tbody></table></div>
+<p>Выполнение проверки данных пользователя выполняется аналогично проверке паролей — свойству UserValidator класса UserManager&lt;T&gt; присваивается объект UserValidator, с предварительно инициализированными свойствами: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs"><span class="hljs-comment">// ...</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Users.Infrastructure</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AppUserManager</span> : <span class="hljs-title">UserManager</span>&lt;<span class="hljs-title">AppUser</span>&gt;
+    {
+        <span class="hljs-comment">// ...</span>
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> AppUserManager <span class="hljs-title">Create</span>(<span class="hljs-params">IdentityFactoryOptions&lt;AppUserManager&gt; options,
+            IOwinContext context</span>)
+        </span>{
+            <span class="hljs-comment">// ...</span>
+
+            manager.UserValidator = <span class="hljs-keyword">new</span> UserValidator&lt;AppUser&gt;(manager)
+            {
+                AllowOnlyAlphanumericUserNames = <span class="hljs-keyword">true</span>,
+                RequireUniqueEmail = <span class="hljs-keyword">true</span>
+            };
+
+            <span class="hljs-keyword">return</span> manager;
+        }
+    }
+}</code></pre>
+</div>
+<p>Класс UserValidator принимает обобщенный тип, который указывает на класс описания пользователя (в нашем случает это AppUser). В конструктор класса  UserValidator передается экземпляр типа UserManager, для связывания проверки пользовательских данных с классом модели пользователя.</p>
+<p>Также как и для проверки паролей, вы можете расширить проверку данных пользователя, создав класс, унаследованный от  UserValidator. В качестве примера добавьте файл CustomUserValidator.cs в папку Infrastructure проекта со следующим содержимым: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs"><span class="hljs-keyword">using</span> Microsoft.AspNet.Identity;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+<span class="hljs-keyword">using</span> Users.Models;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Users.Infrastructure</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomUserValidator</span> : <span class="hljs-title">UserValidator</span>&lt;<span class="hljs-title">AppUser</span>&gt;
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomUserValidator</span>(<span class="hljs-params">AppUserManager manager</span>)
+            : <span class="hljs-title">base</span>(<span class="hljs-params">manager</span>)
+        </span>{ }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;IdentityResult&gt; <span class="hljs-title">ValidateAsync</span>(<span class="hljs-params">AppUser user</span>)
+        </span>{
+            IdentityResult result = <span class="hljs-keyword">await</span> <span class="hljs-keyword">base</span>.ValidateAsync(user);
+
+            <span class="hljs-keyword">if</span> (!user.Email.ToLower().EndsWith(<span class="hljs-string">"@mail.com"</span>))
+            {
+                <span class="hljs-keyword">var</span> errors = result.Errors.ToList();
+                errors.Add(<span class="hljs-string">"Любой email-адрес, отличный от mail.com запрещен"</span>);
+                result = <span class="hljs-keyword">new</span> IdentityResult(errors);
+            }
+
+            <span class="hljs-keyword">return</span> result;
+        }
+    }
+}</code></pre>
+</div>
+<p>Конструктор производного класса должен принимать экземпляр класса управления пользователем (UserManager) и вызывать конструктор базового класса для запуска встроенной проверки достоверности. Настраиваемая проверка осуществляется путем переопределения метода ValidateAsync, который принимает экземпляр класса пользователя (<em>IdentityUser</em>) и возвращает объект IdentityResult. В этом примере мы добавили расширенную проверку поля адреса электронной почты, которая должна включать в себя домен «mail.com». В следующем примере мы расширили метод Create класса AppUserManager, добавив пользовательскую проверку: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs"><span class="hljs-comment">// ...</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Users.Infrastructure</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AppUserManager</span> : <span class="hljs-title">UserManager</span>&lt;<span class="hljs-title">AppUser</span>&gt;
+    {
+        <span class="hljs-comment">// ...</span>
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> AppUserManager <span class="hljs-title">Create</span>(<span class="hljs-params">IdentityFactoryOptions&lt;AppUserManager&gt; options,
+            IOwinContext context</span>)
+        </span>{
+            <span class="hljs-comment">// ...</span>
+
+            manager.UserValidator = <span class="hljs-keyword">new</span> CustomUserValidator(manager)
+            {
+                AllowOnlyAlphanumericUserNames = <span class="hljs-keyword">true</span>,
+                RequireUniqueEmail = <span class="hljs-keyword">true</span>
+            };
+            
+            <span class="hljs-keyword">return</span> manager;
+        }
+    }
+}</code></pre>
+</div>
+<p>На рисунке ниже показан пример тестирования этой проверки, когда email-адрес пользователя не содержит домена «mail.com»: </p>
+<div class="imgcontent"><img src="./ASP.NET Identity _ Валидация данных_files/img49609.jpg" alt="Тестирование расширенной проверки достоверности данных пользователя"></div>
+<h2>Изменения текста ошибок проверки достоверности</h2>
+<p>Чуть ранее я говорил, что покажу как изменить тексты стандартных ошибок проверки достоверности. Очевидно, что ошибки на английском языке для русскоязычного приложения недопустимы. Итак, нам необходимо реализовать интерфейс валидатора <em class="h">IIdentityValidator&lt;T&gt;</em>, где T - тип проверяемого поля. Например, рассмотренный выше класс PasswordValidator реализует интерфейс IIdentityValidator&lt;string&gt;, а UserValidator - IIdentityValidator&lt;IdentityUser&gt;. Для примера давайте изменим определение класса CustomUserValidator: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs"><span class="hljs-keyword">using</span> Microsoft.AspNet.Identity;
+<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Text.RegularExpressions;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+<span class="hljs-keyword">using</span> Users.Models;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Users.Infrastructure</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomUserValidator</span> : <span class="hljs-title">IIdentityValidator</span>&lt;<span class="hljs-title">AppUser</span>&gt;
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;IdentityResult&gt; <span class="hljs-title">ValidateAsync</span>(<span class="hljs-params">AppUser item</span>)
+        </span>{
+            List&lt;<span class="hljs-keyword">string</span>&gt; errors = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+
+            <span class="hljs-keyword">if</span> (String.IsNullOrEmpty(item.UserName.Trim()))
+                errors.Add(<span class="hljs-string">"Вы указали пустое имя."</span>);
+
+            <span class="hljs-keyword">string</span> userNamePattern = <span class="hljs-string">@"^[a-zA-Z0-9а-яА-Я]+$"</span>;
+
+            <span class="hljs-keyword">if</span> (!Regex.IsMatch(item.UserName, userNamePattern))
+                errors.Add(<span class="hljs-string">"В имени разрешается указывать буквы английского или русского языков, и цифры"</span>);
+
+            <span class="hljs-keyword">if</span> (errors.Count &gt; <span class="hljs-number">0</span>)
+                <span class="hljs-keyword">return</span> IdentityResult.Failed(errors.ToArray());
+
+            <span class="hljs-keyword">return</span> IdentityResult.Success;
+        }
+    }
+}</code></pre>
+</div>
+<p>В этом примере мы вручную проверяем заполнение поля и список допустимых символов в имени пользователя. Также необходимо изменить вызов вспомогательного класса валидации в методе Create() класса AppUserManager: </p>
+<div class="titlecode csharpcode"></div>
+<div class="shortcode">
+   <pre><code class="cs hljs">manager.UserValidator = <span class="hljs-keyword">new</span> CustomUserValidator();</code></pre>
+</div>
+     <div style="margin:10px auto; max-width: 970px;" "="">
+  <div style="float:right; width:50%;"><script async="" src="./ASP.NET Identity _ Валидация данных_files/adsbygoogle.js.Без названия"></script>
+<ins class="adsbygoogle" style="display: block; height: 168px;" data-ad-format="fluid" data-ad-layout="image-side" data-ad-layout-key="-ff+4g+9i-dn-2h" data-ad-client="ca-pub-5819559848186638" data-ad-slot="3008722559" data-adsbygoogle-status="done"><ins id="aswift_4_expand" style="display:inline-table;border:none;height:168px;margin:0;padding:0;position:relative;visibility:visible;width:485px;background-color:transparent;"><ins id="aswift_4_anchor" style="display:block;border:none;height:168px;margin:0;padding:0;position:relative;visibility:visible;width:485px;background-color:transparent;"><iframe width="485" height="168" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;width:485px;height:168px;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(3).html"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+  <div style="margin-right:50%;"><script async="" src="./ASP.NET Identity _ Валидация данных_files/adsbygoogle.js.Без названия"></script>
+<ins class="adsbygoogle" style="display: block; height: 135px;" data-ad-format="fluid" data-ad-layout="image-side" data-ad-layout-key="-ff+4g+9i-dn-2h" data-ad-client="ca-pub-5819559848186638" data-ad-slot="3008722559" data-adsbygoogle-status="done"><ins id="aswift_5_expand" style="display: inline-table; border: none; height: 135px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 485px; background-color: transparent;"><ins id="aswift_5_anchor" style="display: block; border: none; height: 135px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 485px; background-color: transparent; overflow: hidden;"><iframe width="485" height="168" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_5" name="aswift_5" style="left:0;position:absolute;top:0;width:485px;height:168px;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(4).html"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+</div>
+<div class="numberpage">
+            <div class="prev"><a href="https://professorweb.ru/my/ASP_NET/identity/level1/1_2.php"></a></div>
+             <div class="block2"><a href="https://professorweb.ru/my/ASP_NET/identity/level1/1_2.php"></a></div>
+             <div class="block3_3"></div>
+             <div class="block4"><a href="https://professorweb.ru/my/ASP_NET/identity/level1/1_4.php"></a></div>
+             <div class="next"><a href="https://professorweb.ru/my/ASP_NET/identity/level1/1_4.php"></a></div>
+         </div>
+         <div id="endcontent"></div>
+    </div>
+    
+<div class="a2192140734272">
+
+	<div class="a4272225054272">
+
+    	<div class="a2192431024272">
+
+    		Мы заметили, что у вас установлена программа для блокировки рекламы. Возможно, вы хотели бы поддержать ProfessorWeb и не резать рекламу?
+
+    	</div>
+
+    </div>
+
+	<div class="a4272815302192">
+
+		<div>
+
+			<div>
+
+				<div class="lock-header">
+
+					Нажмите красную кнопку значка расширения AdBlock, которая по умолчанию располагается справа от строки запроса. В выпадающем меню выберите пункт не запускать на страницах этого домена.
+
+				</div>
+
+				<div class="lock-img"></div>
+
+			</div>
+
+			<div>
+
+				<div class="lock-header second">
+
+					В появившемся модальном окне нажмите кнопку исключить. Тысячекратно извиняемся за то, что просим вас сделать это.
+
+				</div>
+
+				<div class="lock-img second"></div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<footer>
+
+	<p>Alexandr Erohin ✯ alexerohinzzz@gmail.com © 2011 - 2017</p>
+
+</footer>
+
+</div>
+
+<!--[if lte IE 8]>
+
+<meta http-equiv="refresh" content="0; url="../../../../404/ie.html" />
+
+<script type="text/javascript">
+
+/* <![CDATA[ */
+
+window.top.location = '../../../../404/ie.html';
+
+/* ]]> */
+
+</script>
+
+<![endif]-->
+
+<script src="./ASP.NET Identity _ Валидация данных_files/jquery.min.js.Без названия"></script>
+
+<script src="./ASP.NET Identity _ Валидация данных_files/jquery.tmpl.min.js.Без названия"></script>
+
+<script src="./ASP.NET Identity _ Валидация данных_files/highlight.min.js.Без названия"></script>
+
+<script src="./ASP.NET Identity _ Валидация данных_files/scripts.old.js.Без названия"></script>
+     <div class="tests-fixed">
+  <span>
+    Пройди тесты 
+  </span>
+  <ul>
+    <li>
+      <a href="http://professorweb.ru/test/c-sharp-test.html">C# тест (легкий)</a>
+    </li>
+    <li>
+      <a href="http://professorweb.ru/test/asp-test.html">.NET тест (средний)</a>
+    </li>
+  </ul>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-26131629-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter27718821 = new Ya.Metrika({
+                    id:27718821,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>&lt;div&gt;&lt;img src="https://mc.yandex.ru/watch/27718821" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+<script id="error-tmpl" type="text/x-jquery-tmpl">
+	<div class="typo-error">
+		<h6>Ошибка в тексте</h6>
+		<p>&laquo;... <em>${Text}</em> ...&raquo;</p>
+		<p>Послать сообщение об ошибке автору?<br />Ваш браузер останется на этой же странице</p>
+		<input name="text" type="hidden" value="${Text}" />
+        <input type="text" name="error_comment" type="text" placeholder="Комментарий для автора (необязательно)" maxlength="255"></textarea>
+        <a data-action="cancel" class="button dark">Отмена</a>
+        <a data-action="send" style="margin-right: 5px;" class="button light">Отправить</a>
+		<div style="clear:both; height: 20px"></div>
+	</div>
+</script>     
+    
+</div><ins class="adsbygoogle" data-adsbygoogle-status="done" style="display: none; width: auto; height: auto;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe width="0" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;width:0px;height:0px;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(5).html"></iframe></ins></ins></ins>
+    
+<iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="display: none;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(6).html"></iframe><iframe name="oauth2relay2097045763" id="oauth2relay2097045763" src="./ASP.NET Identity _ Валидация данных_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="display: none;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(7).html"></iframe><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="display: none;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(8).html"></iframe><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="display: none;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(9).html"></iframe><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="display: none;" src="./ASP.NET Identity _ Валидация данных_files/saved_resource(10).html"></iframe></body></html>
